@@ -1,8 +1,8 @@
 replicaCount: 2
 
 image:
-  repository: ghcr.io/cloudprowithease/payment-service
-  tag: "v1"
+  repository: nginxdemos/hello
+  tag: "latest"
   pullPolicy: IfNotPresent
 
 service:
