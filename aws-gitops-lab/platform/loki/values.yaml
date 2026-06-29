@@ -795,7 +795,7 @@ test:
 # The Loki canary pushes logs to and queries from this loki installation to test
 # that it's working correctly
 lokiCanary:
-  enabled: true
+  enabled: false
   # -- The type of the loki canary k8s rollout. This can be a DaemonSet or Deployment.
   kind: DaemonSet
   # -- If true, the canary will send directly to Loki via the address configured for verification --
@@ -3672,7 +3672,7 @@ memcachedExporter:
 
 resultsCache:
   # -- Specifies whether memcached based results-cache should be enabled
-  enabled: true
+  enabled: false
   # -- Comma separated addresses list in DNS Service Discovery format
   addresses: dnssrvnoa+_memcached-client._tcp.{{ include "loki.resourceName" (dict "ctx" $ "component" "results-cache") }}.{{ include "loki.namespace" $ }}.svc.{{ .Values.global.clusterDomain }}
   # -- Specify how long cached results should be stored in the results-cache before being expired
@@ -3785,7 +3785,7 @@ chunksCache:
   # -- Append to the name of the resources to make names different for l1 and l2
   suffix: ""
   # -- Specifies whether memcached based chunks-cache should be enabled
-  enabled: true
+  enabled: false
   # -- Comma separated addresses list in DNS Service Discovery format
   addresses: 'dnssrvnoa+_memcached-client._tcp.{{ include "loki.resourceName" (dict "ctx" $ "component" "chunks-cache" "suffix" $.Values.chunksCache.suffix ) }}.{{ include "loki.namespace" $ }}.svc.{{ .Values.global.clusterDomain }}'
   # -- Batchsize for sending and receiving chunks from chunks cache
