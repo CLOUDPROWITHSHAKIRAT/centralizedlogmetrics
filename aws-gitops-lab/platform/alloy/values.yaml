@@ -75,6 +75,17 @@ alloy:
         }
 
         rule {
+          source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name"]
+          target_label  = "app"
+        }
+
+        rule {
+          source_labels = ["__meta_kubernetes_pod_label_app"]
+          regex         = "(.+)"
+          target_label  = "app"
+        }
+
+        rule {
           source_labels = ["namespace", "app"]
           separator     = "/"
           target_label  = "job"
