@@ -57,7 +57,7 @@ imagePullSecrets: []
 # - SingleBinary<->SimpleScalable: Migrate from SingleBinary to SimpleScalable (or vice versa)
 # - SimpleScalable<->Distributed: Migrate from SimpleScalable to Distributed (or vice versa)
 # Note: SimpleScalable and Distributed REQUIRE the use of object storage.
-deploymentMode: SimpleScalable
+deploymentMode: SingleBinary
 # -- Labels to be added to resources
 commonLabels: {}
 ######################################################################################################################
@@ -385,7 +385,7 @@ loki:
       {{- tpl (. | toYaml) $ | nindent 4 }}
     {{- end }}
   # Should authentication be enabled
-  auth_enabled: true
+  auth_enabled: false
   # -- memberlist configuration (overrides embedded default)
   memberlistConfig: {}
   # -- Extra memberlist configuration
@@ -1460,7 +1460,7 @@ migrate:
 # Configuration for the single binary node(s)
 singleBinary:
   # -- Number of replicas for the single binary
-  replicas: 0
+  replicas: 1
   autoscaling:
     # -- Enable autoscaling
     enabled: false
@@ -1582,7 +1582,7 @@ singleBinary:
 # Configuration for the write pod(s)
 write:
   # -- Number of replicas for the write
-  replicas: 3
+  replicas: 0
   autoscaling:
     # -- Enable autoscaling for the write.
     enabled: false
@@ -1724,7 +1724,7 @@ write:
 # --  Configuration for the read pod(s)
 read:
   # -- Number of replicas for the read
-  replicas: 3
+  replicas: 0
   autoscaling:
     # -- Enable autoscaling for the read, this is only used if `queryIndex.enabled: true`
     enabled: false
