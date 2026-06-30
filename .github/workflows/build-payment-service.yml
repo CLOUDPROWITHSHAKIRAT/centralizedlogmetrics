@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "services/payment-service/**"
+      - "aws-gitops-lab/services/payment-service/**"
       - ".github/workflows/build-payment-service.yml"
 
 permissions:
@@ -38,7 +38,7 @@ jobs:
         run: |
           docker build \
             -t 632638637624.dkr.ecr.us-east-1.amazonaws.com/payment-service:${{ env.IMAGE_TAG }} \
-            services/payment-service
+            aws-gitops-lab/services/payment-service
 
       - name: Push image
         run: |
