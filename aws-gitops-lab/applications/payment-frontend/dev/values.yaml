@@ -1,0 +1,24 @@
+replicaCount: 2
+
+image:
+  repository: 632638637624.dkr.ecr.us-east-1.amazonaws.com/payment-frontend
+  tag: "v1"
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
+ingress:
+  enabled: true
+  className: nginx
+  path: /payment-ui
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
