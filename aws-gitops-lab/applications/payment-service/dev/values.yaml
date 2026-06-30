@@ -1,14 +1,14 @@
 replicaCount: 2
 
 image:
-  repository: nginxdemos/hello
-  tag: "latest"
+  repository: 632638637624.dkr.ecr.us-east-1.amazonaws.com/payment-service
+  tag: "v1"
   pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
   port: 80
-  targetPort: 80
+  targetPort: 8000
 
 ingress:
   enabled: true
