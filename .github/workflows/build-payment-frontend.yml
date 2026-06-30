@@ -1,0 +1,45 @@
+name: Build Payment Frontend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "aws-gitops-lab/services/payment-frontend/**"
+      - ".github/workflows/build-payment-frontend.yml"
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: payment-frontend
+  IMAGE_TAG: v1
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::632638637624:role/GitHubActionsECRRole
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build image
+        run: |
+          docker build \
+            -t 632638637624.dkr.ecr.us-east-1.amazonaws.com/payment-frontend:${{ env.IMAGE_TAG }} \
+            aws-gitops-lab/services/payment-frontend
+
+      - name: Push image
+        run: |
+          docker push 632638637624.dkr.ecr.us-east-1.amazonaws.com/payment-frontend:${{ env.IMAGE_TAG }}
