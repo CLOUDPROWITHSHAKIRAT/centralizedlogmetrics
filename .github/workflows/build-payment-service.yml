@@ -1,0 +1,45 @@
+name: Build Payment Service
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "services/payment-service/**"
+      - ".github/workflows/build-payment-service.yml"
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: payment-service
+  IMAGE_TAG: v1
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::632638637624:role/GitHubActionsECRRole
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build image
+        run: |
+          docker build \
+            -t 632638637624.dkr.ecr.us-east-1.amazonaws.com/payment-service:${{ env.IMAGE_TAG }} \
+            services/payment-service
+
+      - name: Push image
+        run: |
+          docker push 632638637624.dkr.ecr.us-east-1.amazonaws.com/payment-service:${{ env.IMAGE_TAG }}
