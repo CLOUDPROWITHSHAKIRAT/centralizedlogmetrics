@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Demo</title>
+  <style>
+    body { font-family: Arial; background:#0b1117; color:white; padding:40px; }
+    button { margin:10px; padding:14px 22px; border:0; border-radius:8px; cursor:pointer; }
+    .success { background:#16a34a; color:white; }
+    .error { background:#dc2626; color:white; }
+    .slow { background:#f59e0b; color:white; }
+    .cpu { background:#7c3aed; color:white; }
+    pre { background:#111827; padding:20px; border-radius:8px; margin-top:20px; }
+  </style>
+</head>
+<body>
+  <h1>Payment Service Demo</h1>
+  <p>Use this UI to generate successful payments, failures, latency, and CPU spikes.</p>
+
+  <button class="success" onclick="callApi('/payment/pay')">Successful Payment</button>
+  <button class="error" onclick="callApi('/payment/pay/error')">Failed Payment</button>
+  <button class="slow" onclick="callApi('/payment/pay/slow')">Slow Payment</button>
+  <button class="cpu" onclick="callApi('/payment/cpu')">CPU Spike</button>
+
+  <pre id="output">Response will appear here...</pre>
+
+  <script>
+    async function callApi(path) {
+      const output = document.getElementById('output');
+      output.textContent = 'Calling ' + path + '...';
+
+      try {
+        const res = await fetch(path);
+        const text = await res.text();
+        output.textContent = 'HTTP ' + res.status + '\n\n' + text;
+      } catch (err) {
+        output.textContent = 'Error: ' + err;
+      }
+    }
+  </script>
+</body>
+</html>
