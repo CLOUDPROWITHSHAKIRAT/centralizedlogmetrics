@@ -1,0 +1,19 @@
+replicaCount: 2
+
+image:
+  repository: 632638637624.dkr.ecr.us-east-1.amazonaws.com/fraud-service
+  tag: "v1"
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 256Mi
