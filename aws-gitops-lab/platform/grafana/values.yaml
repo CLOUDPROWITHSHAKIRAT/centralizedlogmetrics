@@ -423,10 +423,8 @@ extraContainerVolumes: []
 ##
 persistence:
   type: pvc
-  enabled: false
-  # storageClassName: default
-  ## (Optional) Use this to bind the claim to an existing PersistentVolume (PV) by name.
-  volumeName: ""
+  enabled: true
+  storageClassName: gp2
   accessModes:
     - ReadWriteOnce
   size: 10Gi
