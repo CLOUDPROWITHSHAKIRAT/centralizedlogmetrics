@@ -3,6 +3,11 @@ replicaCount: 1
 environment: qa
 clusterName: core-eks-qa
 
+podLabels:
+  app: payment-service
+  cluster: core-eks-qa
+  environment: qa
+
 image:
   repository: 632638637624.dkr.ecr.us-east-1.amazonaws.com/payment-service
   tag: "v1"

@@ -65,8 +65,24 @@ alloy:
         }
 
         rule {
-          replacement  = "core-eks-dev"
-          target_label = "cluster"
+          source_labels = ["__meta_kubernetes_namespace"]
+          regex         = "dev"
+          target_label  = "cluster"
+          replacement   = "core-eks-dev"
+        }
+
+        rule {
+          source_labels = ["__meta_kubernetes_namespace"]
+          regex         = "qa"
+          target_label  = "cluster"
+          replacement   = "core-eks-qa"
+        }
+
+        rule {
+          source_labels = ["__meta_kubernetes_namespace"]
+          regex         = "prod"
+          target_label  = "cluster"
+          replacement   = "core-eks-prod"
         }
 
         rule {

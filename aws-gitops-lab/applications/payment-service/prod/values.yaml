@@ -3,6 +3,11 @@ replicaCount: 1
 environment: prod
 clusterName: core-eks-prod
 
+podLabels:
+  app: payment-service
+  cluster: core-eks-prod
+  environment: prod
+
 image:
   repository: 632638637624.dkr.ecr.us-east-1.amazonaws.com/payment-service
   tag: "v1"
