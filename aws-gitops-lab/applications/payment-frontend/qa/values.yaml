@@ -1,7 +1,7 @@
 replicaCount: 2
 
-environment: dev
-clusterName: core-eks-dev
+environment: qa
+clusterName: core-eks-qa
 
 image:
   repository: 632638637624.dkr.ecr.us-east-1.amazonaws.com/payment-frontend
@@ -16,7 +16,7 @@ service:
 ingress:
   enabled: true
   className: nginx
-  path: /payment-ui
+  path: /payment-ui-qa
 
 resources:
   requests:

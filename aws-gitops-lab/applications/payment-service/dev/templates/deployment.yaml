@@ -4,6 +4,8 @@ metadata:
   name: {{ .Chart.Name }}
   labels:
     app.kubernetes.io/name: {{ .Chart.Name }}
+    environment: {{ .Values.environment }}
+    cluster: {{ .Values.clusterName }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -13,6 +15,8 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: {{ .Chart.Name }}
+        environment: {{ .Values.environment }}
+        cluster: {{ .Values.clusterName }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
