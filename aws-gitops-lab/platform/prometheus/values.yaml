@@ -903,6 +903,21 @@ scrapeConfigs:
       - source_labels: [__meta_kubernetes_pod_node_name]
         action: replace
         target_label: node
+      - source_labels: [__meta_kubernetes_namespace]
+        regex: dev
+        action: replace
+        target_label: cluster
+        replacement: core-eks-dev
+      - source_labels: [__meta_kubernetes_namespace]
+        regex: qa
+        action: replace
+        target_label: cluster
+        replacement: core-eks-qa
+      - source_labels: [__meta_kubernetes_namespace]
+        regex: prod
+        action: replace
+        target_label: cluster
+        replacement: core-eks-prod
   kubernetes-service-endpoints-slow:
     enabled: true
     job_name: ""
